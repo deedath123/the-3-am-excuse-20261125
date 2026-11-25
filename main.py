@@ -13,6 +13,11 @@ ENTRY = (
     "come back at breakfast, human."
 )
 
+# Guard: the bounty wants a single short line; refuse to emit anything
+# outside 1-200 chars rather than silently writing a bad entry.
+if not 1 <= len(ENTRY) <= 200:
+    raise ValueError(f"entry length {len(ENTRY)} outside 1-200 chars")
+
 
 def main() -> None:
     os.makedirs("/output", exist_ok=True)
